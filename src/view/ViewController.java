@@ -13,6 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.util.Callback;
 import model.entities.Pessoa;
 
 /**
@@ -41,6 +44,20 @@ public class ViewController implements Initializable{
 		obsList = FXCollections.observableArrayList(list); 
 		// Carrega os dados da obsList no comboBox.
 		comboxBoxPessoa.setItems(obsList);
+		
+		// Carrega somente os dados de nomes das pessoas para o comboBox:
+		Callback<ListView<Pessoa>, ListCell<Pessoa>> factory = lv -> new ListCell<Pessoa>() {
+
+			@Override
+			protected void updateItem(Pessoa pessoa, boolean empty) {
+				super.updateItem(pessoa, empty);
+				setText(empty ? "" : pessoa.getNome());
+			}
+			
+		};
+		
+		comboxBoxPessoa.setCellFactory(factory);
+		comboxBoxPessoa.setButtonCell(factory.call(null));
 		
 	}
 	
