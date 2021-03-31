@@ -29,7 +29,12 @@ public class ViewController implements Initializable{
 	
 	private ObservableList<Pessoa> obsList;
 	
-	
+	@FXML
+	public void onComboBoxPessoaAction() {
+		// Pegando o item selecionado no comboBox:
+		Pessoa pessoa = comboxBoxPessoa.getSelectionModel().getSelectedItem();
+		System.out.println(pessoa);
+	}
 	
 
 	@Override
